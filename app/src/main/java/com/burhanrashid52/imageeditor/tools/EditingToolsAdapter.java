@@ -26,6 +26,8 @@ public class EditingToolsAdapter extends RecyclerView.Adapter<EditingToolsAdapte
 
     public EditingToolsAdapter(OnItemSelected onItemSelected) {
         mOnItemSelected = onItemSelected;
+        mToolList.add(new ToolModel("Shape", R.drawable.ic_brush, ToolType.SHAPE));
+        mToolList.add(new ToolModel("Line", R.drawable.ic_brush, ToolType.LINE));
         mToolList.add(new ToolModel("Brush", R.drawable.ic_brush, ToolType.BRUSH));
         mToolList.add(new ToolModel("Text", R.drawable.ic_text, ToolType.TEXT));
         mToolList.add(new ToolModel("Eraser", R.drawable.ic_eraser, ToolType.ERASER));
