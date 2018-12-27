@@ -34,18 +34,20 @@ public class BrushDrawingView extends View {
     private float mBrushEraserSize = 50;
     private int mOpacity = 255;
 
-    private Stack<LinePath> mDrawnPaths = new Stack<>();
-    private Stack<LinePath> mRedoPaths = new Stack<>();
-    private Paint mDrawPaint;
+    protected Stack<LinePath> mDrawnPaths = new Stack<>();
+    protected Stack<LinePath> mRedoPaths = new Stack<>();
+    protected Paint mDrawPaint;
 
-    private Canvas mDrawCanvas;
-    private boolean mBrushDrawMode;
+    protected Canvas mDrawCanvas;
+    protected boolean mBrushDrawMode;
 
-    private Path mPath;
-    private float mTouchX, mTouchY;
-    private static final float TOUCH_TOLERANCE = 4;
+    protected Path mPath;
+    protected float mTouchX;
+    protected float mTouchY;
+    protected static final float TOUCH_TOLERANCE = 4;
+    private DrawingView drawingView;
 
-    private BrushViewChangeListener mBrushViewChangeListener;
+    protected BrushViewChangeListener mBrushViewChangeListener;
 
     public BrushDrawingView(Context context) {
         this(context, null);
@@ -208,7 +210,7 @@ public class BrushDrawingView extends View {
         }
     }
 
-    private class LinePath {
+    class LinePath {
         private Paint mDrawPaint;
         private Path mDrawPath;
 
@@ -261,7 +263,7 @@ public class BrushDrawingView extends View {
         }
     }
 
-    private void touchMove(float x, float y) {
+    protected void touchMove(float x, float y) {
         float dx = Math.abs(x - mTouchX);
         float dy = Math.abs(y - mTouchY);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
@@ -271,16 +273,28 @@ public class BrushDrawingView extends View {
         }
     }
 
-    private void touchUp() {
-        mPath.lineTo(mTouchX, mTouchY);
+    protected void touchUp() {
+        //mPath.lineTo(mTouchX, mTouchY);
         // Commit the path to our offscreen
-        mDrawCanvas.drawPath(mPath, mDrawPaint);
-        // kill this so we don't double draw
-        mDrawnPaths.push(new LinePath(mPath, mDrawPaint));
+      try {
+        drawingView = (DrawingView) this.clone();
+        drawingView.mDrawCanvas.drawPath(mPath, mDrawPaint);
+        drawingView.mDrawnPaths.push(new LinePath(mPath, mDrawPaint));
         mPath = new Path();
-        if (mBrushViewChangeListener != null) {
-            mBrushViewChangeListener.onStopDrawing();
-            mBrushViewChangeListener.onViewAdd(this);
+        if (drawingView.mBrushViewChangeListener != null) {
+          drawingView.mBrushViewChangeListener.onStopDrawing();
+          drawingView.mBrushViewChangeListener.onViewAdd(this);
         }
+      } catch (CloneNotSupportedException e) {
+        e.printStackTrace();
+      }
+      //mDrawCanvas.drawPath(mPath, mDrawPaint);
+      //  // kill this so we don't double draw
+      //  mDrawnPaths.push(new LinePath(mPath, mDrawPaint));
+      //  mPath = new Path();
+      //  if (mBrushViewChangeListener != null) {
+      //      mBrushViewChangeListener.onStopDrawing();
+      //      mBrushViewChangeListener.onViewAdd(this);
+      //  }
     }
 }

@@ -29,6 +29,7 @@ import com.burhanrashid52.imageeditor.filters.FilterListener;
 import com.burhanrashid52.imageeditor.filters.FilterViewAdapter;
 import com.burhanrashid52.imageeditor.tools.EditingToolsAdapter;
 import com.burhanrashid52.imageeditor.tools.ToolType;
+import ja.burhanrashid52.photoeditor.DrawingTool;
 import ja.burhanrashid52.photoeditor.OnPhotoEditorListener;
 import ja.burhanrashid52.photoeditor.PhotoEditor;
 import ja.burhanrashid52.photoeditor.PhotoEditorView;
@@ -350,11 +351,19 @@ public class EditImageActivity extends BaseActivity implements OnPhotoEditorList
   public void onToolSelected(ToolType toolType) {
     switch (toolType) {
       case SHAPE:
+        //todo show selection options.
+        mPhotoEditor.setBrushDrawingMode(true, DrawingTool.STAR);
+        mTxtCurrentTool.setText(R.string.label_brush);
+        mPropertiesBSFragment.show(getSupportFragmentManager(), mPropertiesBSFragment.getTag());
         break;
       case LINE:
+        //todo show selection options.
+        mPhotoEditor.setBrushDrawingMode(true, DrawingTool.SQUARE);
+        mTxtCurrentTool.setText(R.string.label_brush);
+        mPropertiesBSFragment.show(getSupportFragmentManager(), mPropertiesBSFragment.getTag());
         break;
       case BRUSH:
-        mPhotoEditor.setBrushDrawingMode(true);
+        mPhotoEditor.setBrushDrawingMode(true, DrawingTool.PEN);
         mTxtCurrentTool.setText(R.string.label_brush);
         mPropertiesBSFragment.show(getSupportFragmentManager(), mPropertiesBSFragment.getTag());
         break;

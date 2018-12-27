@@ -46,7 +46,7 @@ public class PhotoEditor implements BrushViewChangeListener {
     private PhotoEditorView parentView;
     private ImageView imageView;
     private View deleteView;
-    private BrushDrawingView brushDrawingView;
+    private DrawingView brushDrawingView;
     private List<View> addedViews;
     private List<View> redoViews;
     private OnPhotoEditorListener mOnPhotoEditorListener;
@@ -340,6 +340,16 @@ public class PhotoEditor implements BrushViewChangeListener {
     public void setBrushDrawingMode(boolean brushDrawingMode) {
         if (brushDrawingView != null)
             brushDrawingView.setBrushDrawingMode(brushDrawingMode);
+    }
+
+    /**
+     * Enable/Disable drawing mode to draw on {@link PhotoEditorView}
+     *
+     * @param brushDrawingMode true if mode is enabled
+     */
+    public void setBrushDrawingMode(boolean brushDrawingMode, DrawingTool drawingTool) {
+        if (brushDrawingView != null)
+            brushDrawingView.setBrushDrawingMode(brushDrawingMode, drawingTool);
     }
 
     /**
@@ -831,7 +841,7 @@ public class PhotoEditor implements BrushViewChangeListener {
         private PhotoEditorView parentView;
         private ImageView imageView;
         private View deleteView;
-        private BrushDrawingView brushDrawingView;
+        private DrawingView brushDrawingView;
         private Typeface textTypeface;
         private Typeface emojiTypeface;
         //By Default pinch zoom on text is enabled

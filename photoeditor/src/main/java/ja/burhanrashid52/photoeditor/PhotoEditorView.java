@@ -4,11 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -34,7 +31,7 @@ public class PhotoEditorView extends RelativeLayout {
     private static final String TAG = "PhotoEditorView";
 
     private FilterImageView mImgSource;
-    private BrushDrawingView mBrushDrawingView;
+    private DrawingView mBrushDrawingView;
     private ImageFilterView mImageFilterView;
     private static final int imgSrcId = 1, brushSrcId = 2, glFilterId = 3;
 
@@ -77,7 +74,7 @@ public class PhotoEditorView extends RelativeLayout {
         }
 
         //Setup brush view
-        mBrushDrawingView = new BrushDrawingView(getContext());
+        mBrushDrawingView = new DrawingView(getContext());//BrushDrawingView(getContext());
         mBrushDrawingView.setVisibility(GONE);
         mBrushDrawingView.setId(brushSrcId);
         //Align brush to the size of image view
@@ -130,7 +127,7 @@ public class PhotoEditorView extends RelativeLayout {
         return mImgSource;
     }
 
-    BrushDrawingView getBrushDrawingView() {
+    DrawingView getBrushDrawingView() {
         return mBrushDrawingView;
     }
 
