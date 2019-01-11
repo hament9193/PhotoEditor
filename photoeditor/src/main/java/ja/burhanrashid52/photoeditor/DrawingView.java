@@ -149,25 +149,3 @@ public class DrawingView extends BrushDrawingView {
     }
   }
 }
-
-
-  //float mid = Math.abs(x-mStartX) / 2;
-  //float min = Math.min(Math.abs(x-mStartX), Math.abs(y-mStartY));
-  //float fat = min / 17;
-  //float half = min / 2;
-  //float rad = half - fat;
-  //      mid = mid - half;
-  //
-  //          // top left
-  //          mPath.moveTo(mid + half * 0.5f, half * 0.84f);
-  //          // top right
-  //          mPath.lineTo(mid + half * 1.5f, half * 0.84f);
-  //          // bottom left
-  //          mPath.lineTo(mid + half * 0.68f, half * 1.45f);
-  //          // top tip
-  //          mPath.lineTo(mid + half * 1.0f, half * 0.5f);
-  //          // bottom right
-  //          mPath.lineTo(mid + half * 1.32f, half * 1.45f);
-  //          // top left
-  //          mPath.lineTo(mid + half * 0.5f, half * 0.84f);
-  //          mPath.close();
